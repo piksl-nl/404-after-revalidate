@@ -73,8 +73,6 @@ export const getStaticProps: GetStaticProps<PropsType> = async ({ params }) => {
 
   let page = await getPageBySlug(slug[0]);
 
-  if (!page) return { notFound: true };
-
   if (slug.length > 1) {
     const pages = await getPagesByParentId(page.id);
     page = pages.find((page: any) => page.slug === slug[slug.length - 1])!;
@@ -122,6 +120,8 @@ export const getStaticProps: GetStaticProps<PropsType> = async ({ params }) => {
     }
 
     default:
-      return { notFound: true };
+      return {
+        notFound: true,
+      };
   }
 };
